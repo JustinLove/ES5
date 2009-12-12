@@ -17,8 +17,14 @@ es5.Object = {
   getPrototypeOf: function(o) {
     return assertObject(o).__proto__;
   },
-  getOwnPropertyDescriptor: function(o) {
-    return assertObject(o);
+  getOwnPropertyDescriptor: function(o, p) {
+    assertObject(o);
+    return {
+      value: o[p],
+      writeable: true,
+      enumerable: true, // possibly improved, but expensive
+      configurable: true
+    };
   },
   getOwnPropertyNames: null,
   create: null,
