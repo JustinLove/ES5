@@ -36,7 +36,7 @@ es5.Object = {
     }
     return array;
   },
-  create: function(o) {
+  create: function(o, properties) {
     if (o) {
       function F() {};
       F.prototype = assertObject(o);

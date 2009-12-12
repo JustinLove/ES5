@@ -104,6 +104,11 @@ test("Object", function() {
     var y = es5.Object.create(x);
     ok(x === es5.Object.getPrototypeOf(y), "Prototype match");
   });
+
+  test("create with properties", function() {
+    var x = es5.Object.create(null, {a: {value: 1}});
+    equals(x.a, 1);
+  });
 });
 
 
