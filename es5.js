@@ -80,7 +80,38 @@ if (!Object.__proto__) {
 
 es5.Function = {
   prototype: {
-    bind: null
+    bind: function(thisArg) {
+      var target = this;
+      var boundArgs = Array.prototype.slice.call(arguments, 1);
+      var n = Math.min(5, Math.max(0, (target.length - boundArgs.length)));
+      // ugly, but length isn't writeable, so it's this or eval
+      return [
+        function() {
+          return target.apply(thisArg,
+            Array.prototype.concat.apply(boundArgs, arguments));
+        },
+        function(a) {
+          return target.apply(thisArg,
+            Array.prototype.concat.apply(boundArgs, arguments));
+        },
+        function(a, b) {
+          return target.apply(thisArg,
+            Array.prototype.concat.apply(boundArgs, arguments));
+        },
+        function(a, b, c) {
+          return target.apply(thisArg,
+            Array.prototype.concat.apply(boundArgs, arguments));
+        },
+        function(a, b, c, d) {
+          return target.apply(thisArg,
+            Array.prototype.concat.apply(boundArgs, arguments));
+        },
+        function(a, b, c, d, e) {
+          return target.apply(thisArg,
+            Array.prototype.concat.apply(boundArgs, arguments));
+        }
+      ][n];
+    }
   }
 };
 

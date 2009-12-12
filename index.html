@@ -163,6 +163,51 @@ test("Object", function() {
   });
 });
 
+module("Function");
+test("Function", function() {
+  test("bind returns a function", function() {
+    var f = function(){};
+    var g = es5.Function.prototype.bind.call(f, {});
+    equals(typeof(g), 'function');
+  });
+
+  test("bound function is passed function", function() {
+    var f = function(){return 'pass';};
+    var g = es5.Function.prototype.bind.call(f, {});
+    equals(g(), 'pass');
+  });
+
+  test("bound function operates on specified object", function() {
+    var x = {a: 1};
+    var f = function(){return this;};
+    var g = es5.Function.prototype.bind.call(f, x);
+    equals(g(), x);
+  });
+
+  test("bound function operates on specified arguments", function() {
+    var f = function(a){return a;};
+    var g = es5.Function.prototype.bind.call(f, null, 1);
+    equals(g(), 1);
+  });
+
+  test("bound function takes new arguments", function() {
+    var f = function(a){return a;};
+    var g = es5.Function.prototype.bind.call(f, null);
+    equals(g(2), 2);
+  });
+
+  test("bind adjusts length", function() {
+    var f = function(a, b){};
+    var g = es5.Function.prototype.bind.call(f, null, 1);
+    equals(g.length, 1);
+  });
+
+  test("length of bind is 1", function() {
+    equals(es5.Function.prototype.bind.length, 1);
+  });
+});
+
+module("echo");
 
   </script>
   
