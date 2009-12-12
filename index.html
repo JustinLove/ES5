@@ -209,6 +209,17 @@ test("Function", function() {
   });
 });
 
+module("Array");
+test("Array", function() {
+  test("objects are not arrays", function() {
+    equals(es5.Array.isArray({}), false);
+  });
+
+  test("arrays are arrays", function() {
+    equals(es5.Array.isArray([]), true);
+  });
+});
+
 module("echo");
 
   </script>

@@ -124,7 +124,12 @@ es5.Function = {
 };
 
 es5.Array = {
-  isArray: null,
+  isArray: function(arg) {
+    return arg && // null is an object...
+      typeof(arg) == 'object' && 
+      'constructor' in arg &&
+      arg.constructor === Array;
+  },
   prototype: {
     indexOf: null,
     lastIndexOf: null,
