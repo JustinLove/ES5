@@ -8,6 +8,14 @@ function assertObject(o) {
   }
 }
 
+function assertCallable(o) {
+  if (typeof(o) == 'function') {
+    return o;
+  } else {
+    throw new TypeError();
+  }
+}
+
 function stub(o) {
   return assertObject(o);
 }
@@ -81,7 +89,7 @@ if (!Object.__proto__) {
 es5.Function = {
   prototype: {
     bind: function(thisArg) {
-      var target = this;
+      var target = assertCallable(this);
       var boundArgs = Array.prototype.slice.call(arguments, 1);
       var n = Math.min(5, Math.max(0, (target.length - boundArgs.length)));
       // ugly, but length isn't writeable, so it's this or eval

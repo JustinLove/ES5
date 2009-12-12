@@ -16,7 +16,7 @@ test("got a module", function() {
 });
 
 function throwsTypeError(o, f, args) {
-  test(f + " only accepts objects", function() {
+  test(f + " does typechecking", function() {
     try {
       o[f].apply(o, args);
       ok(false, "should have thrown TypeError");
@@ -165,6 +165,8 @@ test("Object", function() {
 
 module("Function");
 test("Function", function() {
+  throwsTypeError(es5.Function.prototype, 'bind');
+  
   test("bind returns a function", function() {
     var f = function(){};
     var g = es5.Function.prototype.bind.call(f, {});
