@@ -1,0 +1,16 @@
+-*- markdown -*-
+
+> King Arthur: One, two, five!  
+> Sir Galahad: Three sir!  
+> King Arthur: THREE!  
+>   - Monty Python and the Holy Grail
+
+# es5 - JavaScript/EcmaScript 5 in 3
+
+While some of the best features of ES5 will never run in an ES3-only engine, it also adds some convenience methods which are perfectly possible to implement in current engines (or at least stub out in a tolerable way)
+
+While  many of these functions are provided by the big JavaScript libraries, it's not always appropriate to the task to bring in the heavy hitters.
+
+## Licence
+
+MIT Licence; see LICENSE.txt
