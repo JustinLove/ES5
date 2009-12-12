@@ -6,7 +6,13 @@
 (function(es5) {
 
 es5.Object = {
-  getPrototypeOf: null,
+  getPrototypeOf: function(o) {
+    if (typeof(o) == 'object' || typeof(o) == 'function') {
+      return o.__proto__;
+    } else {
+      throw new TypeError();
+    }
+  },
   getOwnPrototypeDescriptor: null,
   getOwnPropertyNames: null,
   create: null,

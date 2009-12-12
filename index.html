@@ -15,6 +15,20 @@ test("got a module", function() {
   ok(es5);
 });
 
+module("Object");
+
+test("getPrototypeOf", function() {
+  equals(es5.Object.getPrototypeOf({}), Object.prototype);
+});
+
+test("getPrototypeOf only accepts objects", function() {
+  try {
+    es5.Object.getPrototypeOf(1);
+    ok(false, "should have thrown TypeError");
+  } catch (e) {
+    ok(e instanceof TypeError, "caught TypeError");
+  }
+});
   </script>
   
 </head>
