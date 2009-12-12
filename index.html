@@ -100,6 +100,16 @@ test("Object", function() {
     es5.Object.defineProperty(x, 'a', {value: 1});
     equals(x.a, 1);
   });
+
+  throwsTypeError(es5.Object, 'defineProperties', [1]);
+
+  test("defineProperties", function() {
+    expect(2);
+    x = {};
+    es5.Object.defineProperties(x, {a: {value: 1}, b: {value: 2}});
+    equals(x.a, 1);
+    equals(x.b, 2);
+  });
 });
 
 
