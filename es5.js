@@ -64,7 +64,14 @@ es5.Object = {
   isSealed: function(o) {assertObject(o); return false;},
   isFrozen: function(o) {assertObject(o); return false;},
   isExtensible: function(o) {assertObject(o); return true;},
-  keys: null
+  keys: function(o) {
+    assertObject(o);
+    var array = [];
+    for (var i in o) { 
+      array.push(i);
+    }
+    return array;
+  }
 };
 
 if (!Object.__proto__) {

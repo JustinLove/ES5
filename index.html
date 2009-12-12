@@ -87,7 +87,7 @@ test("Object", function() {
 
   test("getOwnPropertyNames", function() {
     var F = function(){};
-    F.prototype = {Z:26};
+    F.prototype = {z:26};
     var x = new F();
     x.a = 1;
     x.b = 2;
@@ -148,6 +148,19 @@ test("Object", function() {
   queryStub(es5.Object, 'isSealed', false);
   queryStub(es5.Object, 'isFrozen', false);
   queryStub(es5.Object, 'isExtensible', true);
+
+  throwsTypeError(es5.Object, 'keys', [1]);
+
+  test("keys", function() {
+    var F = function(){};
+    F.prototype = {z:26};
+    var x = new F();
+    x.a = 1;
+    x.b = 2;
+
+    var names = es5.Object.keys(x);
+    same(names, ['a', 'b', 'z']);
+  });
 });
 
 
