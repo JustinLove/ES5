@@ -33,7 +33,7 @@ test("getPrototypeOf only accepts objects", function() {
 test("getOwnPropertyDescriptor", function() {
   var x = {a: 1, b: 2};
   var a = es5.Object.getOwnPropertyDescriptor(x, 'a');
-  ok(a);
+  testPropertyDescriptor(a, 'getOwnPropertyDescriptor');
 });
 
 test("getOwnPropertyDescriptor only accepts objects", function() {
@@ -44,6 +44,30 @@ test("getOwnPropertyDescriptor only accepts objects", function() {
     ok(e instanceof TypeError, "caught TypeError");
   }
 });
+
+function testPropertyDescriptor(desc, prefix) {
+  expect(0);
+
+  test(prefix + "truthy", function() {
+    ok(desc);
+  });
+
+  test(prefix + "value property", function() {
+    ok(desc.value);
+  });
+
+  test(prefix + "writeable property", function() {
+    equal(desc.writeable, true);
+  });
+
+  test(prefix + "enumerable property", function() {
+    equal(desc.enumerable, true);
+  });
+
+  test(prefix + "configurable property", function() {
+    equal(desc.configurable, true);
+  });
+}
 
   </script>
   
