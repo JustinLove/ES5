@@ -43,15 +43,16 @@ es5.Object = {
   defineProperty: function(o, p, attributes) {
     assertObject(o);
     o[p] = attributes && attributes.value;
+    return o;
   },
   defineProperties: function(o, properties) {
     assertObject(o);
-    console.log(properties);
     for (var i in properties) { 
       if (properties.hasOwnProperty(i)) {
         o[i] = properties[i] && properties[i].value;
       }
     }
+    return o;
   },
   seal: null,
   freeze: null,

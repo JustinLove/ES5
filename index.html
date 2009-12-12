@@ -101,6 +101,11 @@ test("Object", function() {
     equals(x.a, 1);
   });
 
+  test("defineProperty returns the object", function() {
+    var x = {};
+    equals(es5.Object.defineProperty(x, 'a'), x);
+  });
+
   throwsTypeError(es5.Object, 'defineProperties', [1]);
 
   test("defineProperties", function() {
@@ -110,6 +115,12 @@ test("Object", function() {
     equals(x.a, 1);
     equals(x.b, 2);
   });
+
+  test("defineProperties returns the object", function() {
+    var x = {};
+    equals(es5.Object.defineProperties(x, {a: {}}), x);
+  });
+
 });
 
 
