@@ -26,7 +26,16 @@ es5.Object = {
       configurable: true
     };
   },
-  getOwnPropertyNames: null,
+  getOwnPropertyNames: function(o) {
+    assertObject(o);
+    var array = [];
+    for (var i in o) { 
+      if (o.hasOwnProperty(i)) {
+        array.push(i);
+      }
+    }
+    return array;
+  },
   create: null,
   defineProperty: null,
   defineProperties: null,
