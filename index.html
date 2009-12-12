@@ -86,7 +86,12 @@ test("Object", function() {
   throwsTypeError(es5.Object, 'getOwnPropertyNames', [1]);
 
   test("getOwnPropertyNames", function() {
-    var x = {a: 1, b: 2};
+    var F = function(){};
+    F.prototype = {Z:26};
+    var x = new F();
+    x.a = 1;
+    x.b = 2;
+
     var names = es5.Object.getOwnPropertyNames(x);
     same(names, ['a', 'b']);
   });
