@@ -1,3 +1,8 @@
+// King Arthur: One, two, five!
+// Sir Galahad: Three sir!
+// King Arthur: THREE!
+//  - Monty Python and the Holy Grail
+
 (function(es5) {
 
 es5.Object = {
