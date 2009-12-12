@@ -61,9 +61,9 @@ es5.Object = {
   seal: stub,
   freeze: stub,
   preventExtensions: stub,
-  isSealed: null,
-  isFrozen: null,
-  isExtensible: null,
+  isSealed: function(o) {assertObject(o); return false;},
+  isFrozen: function(o) {assertObject(o); return false;},
+  isExtensible: function(o) {assertObject(o); return true;},
   keys: null
 };
 
