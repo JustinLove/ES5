@@ -29,6 +29,22 @@ test("getPrototypeOf only accepts objects", function() {
     ok(e instanceof TypeError, "caught TypeError");
   }
 });
+
+test("getOwnPropertyDescriptor", function() {
+  var x = {a: 1, b: 2};
+  var a = es5.Object.getOwnPropertyDescriptor(x, 'a');
+  ok(a);
+});
+
+test("getOwnPropertyDescriptor only accepts objects", function() {
+  try {
+    es5.Object.getOwnPropertyDescriptor(1);
+    ok(false, "should have thrown TypeError");
+  } catch (e) {
+    ok(e instanceof TypeError, "caught TypeError");
+  }
+});
+
   </script>
   
 </head>

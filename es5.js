@@ -5,15 +5,21 @@
 
 (function(es5) {
 
+function assertObject(o) {
+  if (typeof(o) == 'object' || typeof(o) == 'function') {
+    return o;
+  } else {
+    throw new TypeError();
+  }
+}
+
 es5.Object = {
   getPrototypeOf: function(o) {
-    if (typeof(o) == 'object' || typeof(o) == 'function') {
-      return o.__proto__;
-    } else {
-      throw new TypeError();
-    }
+    return assertObject(o).__proto__;
   },
-  getOwnPrototypeDescriptor: null,
+  getOwnPropertyDescriptor: function(o) {
+    return assertObject(o);
+  },
   getOwnPropertyNames: null,
   create: null,
   defineProperty: null,
