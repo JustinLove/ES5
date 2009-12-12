@@ -27,6 +27,7 @@ es5.Function = {
 };
 
 es5.Array = {
+  isArray: null,
   prototype: {
     indexOf: null,
     lastIndexOf: null,
