@@ -130,8 +130,31 @@ es5.Array = {
       'constructor' in arg &&
       arg.constructor === Array;
   },
+  // following from Mozilla array extras substitues
+  // e.g. https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Objects/Array/indexOf
   prototype: {
-    indexOf: null,
+    indexOf: function(elt /*, from*/)
+    {
+      var len = this.length >>> 0;
+
+      var from = Number(arguments[1]) || 0;
+      from = (from < 0)
+           ? Math.ceil(from)
+           : Math.floor(from);
+      if (from < 0)
+      {
+        from += len;
+      }
+
+      for (; from < len; from++)
+      {
+        if (from in this && this[from] === elt)
+        {
+          return from;
+        }
+      }
+      return -1;
+    },
     lastIndexOf: null,
     every: null,
     some: null,

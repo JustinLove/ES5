@@ -218,6 +218,30 @@ test("Array", function() {
   test("arrays are arrays", function() {
     equals(es5.Array.isArray([]), true);
   });
+
+  test("indexOf found", function() {
+    equals(es5.Array.prototype.indexOf.call([0, 1, 2, 1], 1), 1);
+  });
+
+  test("indexOf not found", function() {
+    equals(es5.Array.prototype.indexOf.call([0, 1, 2, 1], 42), -1);
+  });
+
+  test("indexOf empty", function() {
+    equals(es5.Array.prototype.indexOf.call([], 42), -1);
+  });
+
+  test("indexOf from", function() {
+    equals(es5.Array.prototype.indexOf.call([0, 1, 2, 1], 1, 2), 3);
+  });
+
+  test("indexOf from negative", function() {
+    equals(es5.Array.prototype.indexOf.call([0, 1, 2, 1], 1, -2), 3);
+  });
+
+  test("indexOf from past the end", function() {
+    equals(es5.Array.prototype.indexOf.call([0, 1, 2, 1], 1, 4), -1);
+  });
 });
 
 module("echo");
