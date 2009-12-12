@@ -26,6 +26,14 @@ function throwsTypeError(o, f, args) {
   });
 }
 
+function stub(o, f) {
+  throwsTypeError(o, f, [1]);
+  var x = {};
+  test(f + " stubbed", function() {
+    equals(o[f].apply(o, [x]), x);
+  });
+}
+
 function testPropertyDescriptor(desc, value, prefix) {
   expect(0);
 
@@ -121,6 +129,9 @@ test("Object", function() {
     equals(es5.Object.defineProperties(x, {a: {}}), x);
   });
 
+  stub(es5.Object, 'seal');
+  stub(es5.Object, 'freeze');
+  stub(es5.Object, 'preventExtensions');
 });
 
 

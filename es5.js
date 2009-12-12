@@ -8,6 +8,10 @@ function assertObject(o) {
   }
 }
 
+function stub(o) {
+  return assertObject(o);
+}
+
 es5.Object = {
   getPrototypeOf: function(o) {
     return assertObject(o).__proto__;
@@ -54,9 +58,9 @@ es5.Object = {
     }
     return o;
   },
-  seal: null,
-  freeze: null,
-  preventExtensions: null,
+  seal: stub,
+  freeze: stub,
+  preventExtensions: stub,
   isSealed: null,
   isFrozen: null,
   isExtensible: null,
