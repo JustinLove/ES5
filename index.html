@@ -85,6 +85,25 @@ test("Object", function() {
     var names = es5.Object.getOwnPropertyNames(x);
     same(names, ['a', 'b']);
   });
+
+  test("create only accepts objects", function() {
+    try {
+      es5.Object.create(1);
+      ok(false, "should have thrown TypeError");
+    } catch (e) {
+      ok(e instanceof TypeError, "caught TypeError");
+    }
+  });
+
+  test("create with null", function() {
+    ok(es5.Object.create());
+  });
+
+  test("create with an object", function() {
+    var x = {};
+    var y = es5.Object.create(x);
+    ok(x === es5.Object.getPrototypeOf(y), "Prototype match");
+  });
 });
 
 

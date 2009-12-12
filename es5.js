@@ -36,7 +36,15 @@ es5.Object = {
     }
     return array;
   },
-  create: null,
+  create: function(o) {
+    if (o) {
+      function F() {};
+      F.prototype = assertObject(o);
+      return new F();
+    } else {
+      return {};
+    }
+  },
   defineProperty: null,
   defineProperties: null,
   seal: null,
