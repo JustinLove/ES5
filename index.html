@@ -15,6 +15,17 @@ test("got a module", function() {
   ok(es5);
 });
 
+function throwsTypeError(o, f, args) {
+  test(f + " only accepts objects", function() {
+    try {
+      o[f].apply(o, args);
+      ok(false, "should have thrown TypeError");
+    } catch (e) {
+      ok(e instanceof TypeError, "caught TypeError");
+    }
+  });
+}
+
 function testPropertyDescriptor(desc, value, prefix) {
   expect(0);
 
@@ -43,27 +54,13 @@ module("Object");
 test("Object", function() {
   ok(es5.Object);
 
-  test("getPrototypeOf only accepts objects", function() {
-    try {
-      es5.Object.getPrototypeOf(1);
-      ok(false, "should have thrown TypeError");
-    } catch (e) {
-      ok(e instanceof TypeError, "caught TypeError");
-    }
-  });
+  throwsTypeError(es5.Object, 'getPrototypeOf', [1]);
 
   test("getPrototypeOf", function() {
     equals(es5.Object.getPrototypeOf({}), Object.prototype);
   });
 
-  test("getOwnPropertyDescriptor only accepts objects", function() {
-    try {
-      es5.Object.getOwnPropertyDescriptor(1);
-      ok(false, "should have thrown TypeError");
-    } catch (e) {
-      ok(e instanceof TypeError, "caught TypeError");
-    }
-  });
+  throwsTypeError(es5.Object, 'getOwnPropertyDescriptor', [1]);
 
   test("getOwnPropertyDescriptor", function() {
     var x = {a: 1, b: 2};
@@ -71,14 +68,7 @@ test("Object", function() {
     testPropertyDescriptor(a, 1, 'getOwnPropertyDescriptor');
   });
 
-  test("getOwnPropertyNames only accepts objects", function() {
-    try {
-      es5.Object.getOwnPropertyNames(1);
-      ok(false, "should have thrown TypeError");
-    } catch (e) {
-      ok(e instanceof TypeError, "caught TypeError");
-    }
-  });
+  throwsTypeError(es5.Object, 'getOwnPropertyNames', [1]);
 
   test("getOwnPropertyNames", function() {
     var x = {a: 1, b: 2};
@@ -86,14 +76,7 @@ test("Object", function() {
     same(names, ['a', 'b']);
   });
 
-  test("create only accepts objects", function() {
-    try {
-      es5.Object.create(1);
-      ok(false, "should have thrown TypeError");
-    } catch (e) {
-      ok(e instanceof TypeError, "caught TypeError");
-    }
-  });
+  throwsTypeError(es5.Object, 'create', [1]);
 
   test("create with null", function() {
     ok(es5.Object.create());
