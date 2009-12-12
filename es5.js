@@ -35,9 +35,9 @@ es5.Object = {
     if (o) {
       function F() {};
       F.prototype = assertObject(o);
-      return new F();
+      return es5.Object.defineProperties(new F(), properties);
     } else {
-      return {};
+      return es5.Object.defineProperties({}, properties);
     }
   },
   defineProperty: function(o, p, attributes) {
