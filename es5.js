@@ -40,7 +40,10 @@ es5.Object = {
       return {};
     }
   },
-  defineProperty: null,
+  defineProperty: function(o, p, attributes) {
+    assertObject(o);
+    o[p] = attributes && attributes.value;
+  },
   defineProperties: null,
   seal: null,
   freeze: null,

@@ -92,6 +92,14 @@ test("Object", function() {
     var x = es5.Object.create(null, {a: {value: 1}});
     equals(x.a, 1);
   });
+
+  throwsTypeError(es5.Object, 'defineProperty', [1]);
+
+  test("defineProperty", function() {
+    var x = {};
+    es5.Object.defineProperty(x, 'a', {value: 1});
+    equals(x.a, 1);
+  });
 });
 
 
