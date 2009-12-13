@@ -117,7 +117,7 @@ function usesFourArgumentCallback(name) {
 
   test(name + " passes index as third argument", function() {
     expect(1);
-    es5.Array.prototype[name].call([true, true], function(acc, v, i) {return equals(1, i);});
+    es5.Array.prototype[name].call([true], function(acc, v, i) {return equals(0, i);}, true);
   });
 
   test(name + " passes array as fourth argument", function() {
@@ -392,10 +392,18 @@ test("Array", function() {
 
 
   usesFourArgumentCallback('reduce');
-  
+
   test("reduce goes left to right", function() {
     expect(3);
     es5.Array.prototype.reduce.call([0, 1, 2], function(acc, v) {equals(acc, v); return acc + 1;}, 0);
+  });
+
+
+  usesFourArgumentCallback('reduceRight');
+
+  test("reduceRight goes right to left", function() {
+    expect(3);
+    es5.Array.prototype.reduceRight.call([0, 1, 2], function(acc, v) {equals(acc, v); return acc - 1;}, 2);
   });
 });
 

@@ -279,7 +279,41 @@ es5.Array = {
 
       return rv;
     },
-    reduceRight: null
+    reduceRight: function(fun /*, initial*/) {
+      var len = this.length >>> 0;
+      assertCallable(fun);
+
+      // no value to return if no initial value and an empty array
+      if (len == 0 && arguments.length == 1) {
+        throw new TypeError();
+      }
+
+      var i = len - 1;
+      if (arguments.length >= 2) {
+        var rv = arguments[1];
+      } else {
+        do {
+          if (i in this) {
+            rv = this[i--];
+            break;
+          }
+
+          // if array contains no values, no initial value to return
+          if (--i < 0) {
+            throw new TypeError();
+          }
+        }
+        while (true);
+      }
+
+      for (; i >= 0; i--) {
+        if (i in this) {
+          rv = fun.call(null, rv, this[i], i, this);
+        }
+      }
+
+      return rv;
+    }
   }
 };
 
