@@ -74,7 +74,7 @@ function usesThreeArgumentCallback(name) {
 
   test(name + " should have undefined this, but the engine supplies [window] even if we try to pass undefined", function() {
     expect(1);
-    es5.Array.prototype[name].call([true], function() {return same(this, {});});
+    es5.Array.prototype[name].call([true], function() {return same(this, window);});
   });
 
   test(name + " passes value as first argument", function() {

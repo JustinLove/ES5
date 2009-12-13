@@ -179,7 +179,7 @@ es5.Array = {
       var len = this.length >>> 0;
       assertCallable(fun);
 
-      var thisp = arguments[1] || {};
+      var thisp = arguments[1];
       for (var i = 0; i < len; i++) {
         if (i in this && !fun.call(thisp, this[i], i, this)) {
           return false;
@@ -193,7 +193,7 @@ es5.Array = {
       var len = this.length >>> 0;
       assertCallable(fun);
 
-      var thisp = arguments[1] || {};
+      var thisp = arguments[1];
       for (; i < len; i++) {
         if (i in this && fun.call(thisp, this[i], i, this)) {
           return true;
@@ -206,7 +206,7 @@ es5.Array = {
       var len = this.length >>> 0;
       assertCallable(fun);
 
-      var thisp = arguments[1] || {};
+      var thisp = arguments[1];
       for (var i = 0; i < len; i++) {
         if (i in this) {
           fun.call(thisp, this[i], i, this);
@@ -217,7 +217,7 @@ es5.Array = {
       var len = this.length >>> 0;
       assertCallable(fun);
 
-      var thisp = arguments[1] || {};
+      var thisp = arguments[1];
       var res = new Array(len);
       for (var i = 0; i < len; i++) {
         if (i in this) {
@@ -232,7 +232,7 @@ es5.Array = {
       assertCallable(fun);
 
       var res = new Array();
-      var thisp = arguments[1] || {};
+      var thisp = arguments[1];
       for (var i = 0; i < len; i++) {
         if (i in this) {
           var val = this[i]; // in case fun mutates this
