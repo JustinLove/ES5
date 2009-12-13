@@ -65,6 +65,39 @@ function testPropertyDescriptor(desc, value, prefix) {
   });
 }
 
+function usesThreeArgumentCallback(name) {
+  test(name + " calls with specified object", function() {
+    expect(1);
+    var x = {};
+    es5.Array.prototype[name].call([true], function() {return equals(this, x);}, x);
+  });
+
+  test(name + " should have undefined this, but the engine supplies [window] even if we try to pass undefined", function() {
+    expect(1);
+    es5.Array.prototype[name].call([true], function() {return same(this, {});});
+  });
+
+  test(name + " passes value as first argument", function() {
+    expect(1);
+    es5.Array.prototype[name].call([true], function(v) {return equals(true, v);});
+  });
+
+  test(name + " passes index as first argument", function() {
+    expect(1);
+    es5.Array.prototype[name].call([true], function(v, i) {return equals(0, i);});
+  });
+
+  test(name + " passes array as third argument", function() {
+    expect(1);
+    var x = [true];
+    es5.Array.prototype[name].call(x, function(v, i, a) {return equals(x, a);});
+  });
+
+  var x = [];
+  x.every = es5.Array.prototype[name];
+  throwsTypeError(x, name, [1]);
+}
+
 module("Object");
 test("Object", function() {
   ok(es5.Object);
@@ -277,40 +310,11 @@ test("Array", function() {
     equals(es5.Array.prototype.every.call([false, true], function(v) {return v;}), false);
   });
 
-  test("every calls with specified object", function() {
-    expect(1);
-    var x = {};
-    es5.Array.prototype.every.call([true], function() {return equals(this, x);}, x);
-  });
-
-  test("every should have undefined this, but the engine supplies [window] even if we try to pass undefined", function() {
-    expect(1);
-    es5.Array.prototype.every.call([true], function() {return same(this, {});});
-  });
-
-  test("every passes value as first argument", function() {
-    expect(1);
-    es5.Array.prototype.every.call([true], function(v) {return equals(true, v);});
-  });
-
-  test("every passes index as first argument", function() {
-    expect(1);
-    es5.Array.prototype.every.call([true], function(v, i) {return equals(0, i);});
-  });
-
-  test("every passes array as third argument", function() {
-    expect(1);
-    var x = [true];
-    es5.Array.prototype.every.call(x, function(v, i, a) {return equals(x, a);});
-  });
-
-  test("every is true for empty array", function() {
+ test("every is true for empty array", function() {
     equals(es5.Array.prototype.every.call([], function() {return false;}), true);
   });
 
-  var x = [];
-  x.every = es5.Array.prototype.some;
-  throwsTypeError(x, 'every', [1]);
+  usesThreeArgumentCallback('every');
 
 
   test("some can return true", function() {
@@ -321,40 +325,11 @@ test("Array", function() {
     equals(es5.Array.prototype.some.call([false, false], function(v) {return v;}), false);
   });
 
-  test("some calls with specified object", function() {
-    expect(1);
-    var x = {};
-    es5.Array.prototype.some.call([true], function() {return equals(this, x);}, x);
-  });
-
-  test("some should have undefined this, but the engine supplies [window] even if we try to pass undefined", function() {
-    expect(1);
-    es5.Array.prototype.some.call([true], function() {return same(this, {});});
-  });
-
-  test("some passes value as first argument", function() {
-    expect(1);
-    es5.Array.prototype.some.call([true], function(v) {return equals(true, v);});
-  });
-
-  test("some passes index as first argument", function() {
-    expect(1);
-    es5.Array.prototype.some.call([true], function(v, i) {return equals(0, i);});
-  });
-
-  test("some passes array as third argument", function() {
-    expect(1);
-    var x = [true];
-    es5.Array.prototype.some.call(x, function(v, i, a) {return equals(x, a);});
-  });
-
   test("some is false for empty array", function() {
     equals(es5.Array.prototype.some.call([], function() {return true;}), false);
   });
 
-  var x = [];
-  x.some = es5.Array.prototype.some;
-  throwsTypeError(x, 'some', [1]);
+  usesThreeArgumentCallback('some');
 });
 
 module("echo");
