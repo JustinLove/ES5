@@ -188,7 +188,20 @@ es5.Array = {
 
       return true;
     },
-    some: null,
+    some: function(fun /*, thisp*/) {
+      var i = 0;
+      var len = this.length >>> 0;
+      assertCallable(fun);
+
+      var thisp = arguments[1] || {};
+      for (; i < len; i++) {
+        if (i in this && fun.call(thisp, this[i], i, this)) {
+          return true;
+        }
+      }
+
+      return false;
+    },
     forEach: null,
     map: null,
     filter: null,
