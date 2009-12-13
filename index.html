@@ -340,6 +340,13 @@ test("Array", function() {
   test("map collects return values", function() {
     same(es5.Array.prototype.map.call([1, 2, 3], function(v) {return v + 1;}), [2, 3, 4]);
   });
+
+
+  usesThreeArgumentCallback('filter');
+
+  test("filter does", function() {
+    same(es5.Array.prototype.filter.call([1, 2, 3, 4], function(v) {return v % 2 == 0;}), [2, 4]);
+  });
 });
 
 module("echo");
