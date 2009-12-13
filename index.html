@@ -267,7 +267,51 @@ test("Array", function() {
   test("lastIndexOf from past the end", function() {
     equals(es5.Array.prototype.lastIndexOf.call([2, 1, 2, 3], 1, 0), -1);
   });
+
+
+  test("every can return true", function() {
+    equals(es5.Array.prototype.every.call([true, true], function(v) {return v;}), true);
+  });
+
+  test("every can return false", function() {
+    equals(es5.Array.prototype.every.call([false, true], function(v) {return v;}), false);
+  });
+
+  test("every calls with specified object", function() {
+    expect(1);
+    var x = {};
+    es5.Array.prototype.every.call([true], function() {return equals(this, x);}, x);
+  });
+
+  test("every should have undefined this, but the engine supplies [window] even if we try to pass undefined", function() {
+    expect(1);
+    es5.Array.prototype.every.call([true], function() {return same(this, {});});
+  });
+
+  test("every passes value as first argument", function() {
+    expect(1);
+    es5.Array.prototype.every.call([true], function(v) {return equals(true, v);});
+  });
+
+  test("every passes index as first argument", function() {
+    expect(1);
+    es5.Array.prototype.every.call([true], function(v, i) {return equals(0, i);});
+  });
+
+  test("every passes array as third argument", function() {
+    expect(1);
+    var x = [true];
+    es5.Array.prototype.every.call(x, function(v, i, a) {return equals(x, a);});
+  });
+
+  test("every is true for empty array", function() {
+    equals(es5.Array.prototype.every.call([], function() {return false;}), true);
+  });
 });
+
+  var x = [];
+  x.every = es5.Array.prototype.every;
+  throwsTypeError(x, 'every', [1]);
 
 module("echo");
 
