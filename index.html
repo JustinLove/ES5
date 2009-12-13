@@ -414,6 +414,15 @@ test("String", function() {
   });
 });
 
+module("Date");
+test("Date", function() {
+  test("now", function() {
+    var x = es5.Date.now();
+    equals(typeof(x), 'number');
+    ok(x > 0, 'time is positive');
+  });
+});
+
 module("echo");
 
   </script>

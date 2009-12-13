@@ -326,7 +326,7 @@ es5.String = {
 };
 
 es5.Date = {
-  now: null,
+  now: function() {return new Date().getTime();},
   prototype: {
     toISOString: null,
     toJSON: null
