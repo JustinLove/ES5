@@ -360,4 +360,25 @@ es5.Date = {
   }
 };
 
+function infect(host, virus) {
+  for (stat in virus) {
+    if (virus.hasOwnProperty(stat) && stat != 'prototype' && !(stat in host)) {
+      host[stat] = virus[stat];
+    }
+  }
+  for (meth in virus.prototype) {
+    // hasOwnProperty return 'undefined' for an object named prototype?
+    if (!(meth in host.prototype)) {
+      host.prototype[meth] = virus.prototype[meth];
+    }
+  }
+}
+
+infect(Object, es5.Object);
+infect(Function, es5.Function);
+infect(String, es5.String);
+infect(Array, es5.Array);
+infect(String, es5.String);
+infect(Date, es5.Date);
+
 })(this.exports = this.exports || {});
