@@ -325,10 +325,22 @@ es5.String = {
   }
 };
 
+function two(n) {
+  var s = n.toString();
+  return s.length < 2 ? '0'+s : s;
+}
+
 es5.Date = {
   now: function() {return new Date().getTime();},
   prototype: {
-    toISOString: null,
+    toISOString: function() {
+      return this.getUTCFullYear()+'-'+
+         two(this.getUTCMonth()+1)+'-'+
+         two(this.getUTCDate())   +'T'+
+         two(this.getUTCHours())  +':'+
+         two(this.getUTCMinutes())+':'+
+         two(this.getUTCSeconds())+'Z';
+    },
     toJSON: null
   }
 };

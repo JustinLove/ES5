@@ -421,6 +421,10 @@ test("Date", function() {
     equals(typeof(x), 'number');
     ok(x > 0, 'time is positive');
   });
+
+  test("toISOString", function() {
+    equals(es5.Date.prototype.toISOString.call(new Date(1975, 12 - 1, 15, 5, 45)), "1975-12-15T11:45:00Z");
+  });
 });
 
 module("echo");
