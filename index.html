@@ -98,6 +98,48 @@ function usesThreeArgumentCallback(name) {
   throwsTypeError(x, name, [1]);
 }
 
+function usesFourArgumentCallback(name) {
+  test(name + " should have undefined this, but the engine supplies [window] even if we try to pass undefined", function() {
+    expect(1);
+    es5.Array.prototype[name].call([true, true], function() {return same(this, window);});
+  });
+
+  test(name + " passes accumulator as first argument", function() {
+    expect(1);
+    var x = {};
+    es5.Array.prototype[name].call([true], function(acc) {return equals(acc, x);}, x);
+  });
+
+  test(name + " passes value as second argument", function() {
+    expect(1);
+    es5.Array.prototype[name].call([true, true], function(acc, v) {return equals(true, v);});
+  });
+
+  test(name + " passes index as third argument", function() {
+    expect(1);
+    es5.Array.prototype[name].call([true, true], function(acc, v, i) {return equals(1, i);});
+  });
+
+  test(name + " passes array as fourth argument", function() {
+    expect(1);
+    var x = [true, true];
+    es5.Array.prototype[name].call(x, function(acc, v, i, a) {return equals(x, a);});
+  });
+
+  test(name + " returns accumulator", function() {
+    var x = {};
+    equals(es5.Array.prototype[name].call([], function() {}, x), x);
+  });
+
+  test(name + " passes accumulator through", function() {
+    equals(es5.Array.prototype[name].call([2, 3, 5], function(acc, v) {return acc + v;}, 0), 10);
+  });
+
+  var x = [];
+  x.every = es5.Array.prototype[name];
+  throwsTypeError(x, name, [1]);
+}
+
 module("Object");
 test("Object", function() {
   ok(es5.Object);
@@ -346,6 +388,14 @@ test("Array", function() {
 
   test("filter does", function() {
     same(es5.Array.prototype.filter.call([1, 2, 3, 4], function(v) {return v % 2 == 0;}), [2, 4]);
+  });
+
+
+  usesFourArgumentCallback('reduce');
+  
+  test("reduce goes left to right", function() {
+    expect(3);
+    es5.Array.prototype.reduce.call([0, 1, 2], function(acc, v) {equals(acc, v); return acc + 1;}, 0);
   });
 });
 
