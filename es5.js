@@ -133,56 +133,43 @@ es5.Array = {
   // following from Mozilla array extras substitues
   // e.g. https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Objects/Array/indexOf
   prototype: {
-    indexOf: function(elt /*, from*/)
-    {
+    indexOf: function(elt /*, from*/) {
       var len = this.length >>> 0;
 
       var from = Number(arguments[1]) || 0;
       from = (from < 0)
            ? Math.ceil(from)
            : Math.floor(from);
-      if (from < 0)
-      {
+      if (from < 0) {
         from += len;
       }
 
-      for (; from < len; from++)
-      {
-        if (from in this && this[from] === elt)
-        {
+      for (; from < len; from++) {
+        if (from in this && this[from] === elt) {
           return from;
         }
       }
       return -1;
     },
-    lastIndexOf: function(elt /*, from*/)
-    {
+    lastIndexOf: function(elt /*, from*/) {
       var len = this.length;
 
       var from = Number(arguments[1]);
-      if (isNaN(from))
-      {
+      if (isNaN(from)) {
         from = len - 1;
-      }
-      else
-      {
+      } else {
         from = (from < 0)
              ? Math.ceil(from)
              : Math.floor(from);
-        if (from < 0)
-        {
+        if (from < 0) {
           from += len;
-        }
-        else if (from >= len)
-        {
+        } else if (from >= len) {
           from = len - 1;
         }
       }
 
-      for (; from > -1; from--)
-      {
-        if (from in this && this[from] === elt)
-        {
+      for (; from > -1; from--) {
+        if (from in this && this[from] === elt) {
           return from;
         }
       }
