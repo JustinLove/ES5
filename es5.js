@@ -319,7 +319,9 @@ es5.Array = {
 
 es5.String = {
   prototype: {
-    trim: null
+    trim: function() {
+      return this.replace(/^\s*(\S+)\s*$/, "$1");
+    }
   }
 };
 

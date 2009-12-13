@@ -407,6 +407,13 @@ test("Array", function() {
   });
 });
 
+module("String");
+test("String", function() {
+  test("trim", function() {
+    equals(es5.String.prototype.trim.call(' a '), 'a');
+  });
+});
+
 module("echo");
 
   </script>
