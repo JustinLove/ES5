@@ -11,6 +11,10 @@ While some of the best features of ES5 will never run in an ES3-only engine, it 
 
 While  many of these functions are provided by the big JavaScript libraries, it's not always appropriate to the task to bring in the heavy hitters.
 
+## JSON
+
+There are no plans to implement the JSON Object at this time, since none of the project authors have need of it.
+
 ## Licence
 
 MIT Licence; see LICENSE.txt
