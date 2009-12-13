@@ -308,6 +308,10 @@ test("Array", function() {
     equals(es5.Array.prototype.every.call([], function() {return false;}), true);
   });
 
+  var x = [];
+  x.every = es5.Array.prototype.some;
+  throwsTypeError(x, 'every', [1]);
+
 
   test("some can return true", function() {
     equals(es5.Array.prototype.some.call([false, true], function(v) {return v;}), true);
@@ -347,11 +351,11 @@ test("Array", function() {
   test("some is false for empty array", function() {
     equals(es5.Array.prototype.some.call([], function() {return true;}), false);
   });
-});
 
   var x = [];
   x.some = es5.Array.prototype.some;
   throwsTypeError(x, 'some', [1]);
+});
 
 module("echo");
 
