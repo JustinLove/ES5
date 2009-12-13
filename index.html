@@ -423,7 +423,15 @@ test("Date", function() {
   });
 
   test("toISOString", function() {
-    equals(es5.Date.prototype.toISOString.call(new Date(1975, 12 - 1, 15, 5, 45)), "1975-12-15T11:45:00Z");
+    equals(es5.Date.prototype.toISOString.call(new Date(1975, 12 - 1, 15, 5, 45)), "1975-12-15T11:45:00.000Z");
+  });
+
+  test("toJSON", function() {
+    equals(es5.Date.prototype.toJSON.call(new Date(1975, 12 - 1, 15, 5, 45)), "1975-12-15T11:45:00.000Z");
+  });
+
+  test("toJSON rejects non-finite dates", function() {
+    equals(es5.Date.prototype.toJSON.call(new Date(NaN), null));
   });
 });
 

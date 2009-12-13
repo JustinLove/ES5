@@ -330,6 +330,11 @@ function two(n) {
   return s.length < 2 ? '0'+s : s;
 }
 
+function three(n) {
+  var s = two(n);
+  return s.length < 3 ? '0'+s : s;
+}
+
 es5.Date = {
   now: function() {return new Date().getTime();},
   prototype: {
@@ -339,9 +344,19 @@ es5.Date = {
          two(this.getUTCDate())   +'T'+
          two(this.getUTCHours())  +':'+
          two(this.getUTCMinutes())+':'+
-         two(this.getUTCSeconds())+'Z';
+         two(this.getUTCSeconds())+'.'+
+       three(this.getUTCMilliseconds())+'Z';
     },
-    toJSON: null
+    toJSON: function(key) {
+      if (!isFinite(this.valueOf())) {
+        return null;
+      }
+      if (this.toISOString) {
+        return this.toISOString();
+      } else {
+        return es5.Date.prototype.toISOString.call(this);
+      }
+    }
   }
 };
 
