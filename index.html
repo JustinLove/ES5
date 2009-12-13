@@ -333,6 +333,13 @@ test("Array", function() {
 
 
   usesThreeArgumentCallback('forEach');
+
+
+  usesThreeArgumentCallback('map');
+
+  test("map collects return values", function() {
+    same(es5.Array.prototype.map.call([1, 2, 3], function(v) {return v + 1;}), [2, 3, 4]);
+  });
 });
 
 module("echo");

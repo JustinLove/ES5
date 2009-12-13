@@ -213,7 +213,20 @@ es5.Array = {
         }
       }
     },
-    map: null,
+    map: function(fun /*, thisp*/) {
+      var len = this.length >>> 0;
+      assertCallable(fun);
+
+      var thisp = arguments[1] || {};
+      var res = new Array(len);
+      for (var i = 0; i < len; i++) {
+        if (i in this) {
+          res[i] = fun.call(thisp, this[i], i, this);
+        }
+      }
+
+      return res;
+    },
     filter: null,
     reduce: null,
     reduceRight: null
