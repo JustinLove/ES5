@@ -242,6 +242,31 @@ test("Array", function() {
   test("indexOf from past the end", function() {
     equals(es5.Array.prototype.indexOf.call([0, 1, 2, 1], 1, 4), -1);
   });
+
+
+  test("lastIndexOf found", function() {
+    equals(es5.Array.prototype.lastIndexOf.call([2, 1, 2, 3], 2), 2);
+  });
+
+  test("lastIndexOf not found", function() {
+    equals(es5.Array.prototype.lastIndexOf.call([2, 1, 2, 3], 42), -1);
+  });
+
+  test("lastIndexOf empty", function() {
+    equals(es5.Array.prototype.lastIndexOf.call([], 42), -1);
+  });
+
+  test("lastIndexOf from", function() {
+    equals(es5.Array.prototype.lastIndexOf.call([2, 1, 2, 3], 2, 1), 0);
+  });
+
+  test("lastIndexOf from negative", function() {
+    equals(es5.Array.prototype.lastIndexOf.call([2, 1, 2, 3], 2, -3), 0);
+  });
+
+  test("lastIndexOf from past the end", function() {
+    equals(es5.Array.prototype.lastIndexOf.call([2, 1, 2, 3], 1, 0), -1);
+  });
 });
 
 module("echo");
