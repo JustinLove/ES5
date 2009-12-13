@@ -202,7 +202,17 @@ es5.Array = {
 
       return false;
     },
-    forEach: null,
+    forEach: function(fun /*, thisp*/) {
+      var len = this.length >>> 0;
+      assertCallable(fun);
+
+      var thisp = arguments[1] || {};
+      for (var i = 0; i < len; i++) {
+        if (i in this) {
+          fun.call(thisp, this[i], i, this);
+        }
+      }
+    },
     map: null,
     filter: null,
     reduce: null,
