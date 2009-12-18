@@ -361,12 +361,12 @@ es5.Date = {
 };
 
 function infect(host, virus) {
-  for (stat in virus) {
+  for (var stat in virus) {
     if (virus.hasOwnProperty(stat) && stat != 'prototype' && !(stat in host)) {
       host[stat] = virus[stat];
     }
   }
-  for (meth in virus.prototype) {
+  for (var meth in virus.prototype) {
     // hasOwnProperty return 'undefined' for an object named prototype?
     if (!(meth in host.prototype)) {
       host.prototype[meth] = virus.prototype[meth];

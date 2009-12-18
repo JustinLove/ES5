@@ -439,16 +439,22 @@ module("pollution");
 var god = this;
 test("pollution", function() {
   for (var mod in es5) {
-    for (stat in es5[mod]) {
+    for (var stat in es5[mod]) {
       if (es5[mod].hasOwnProperty(stat) && stat != 'prototype') {
         ok(god[mod][stat], mod + '.' + stat);
       }
     }
-    for (meth in es5[mod].prototype) {
+    for (var meth in es5[mod].prototype) {
       // hasOwnProperty return 'undefined' for an object named prototype?
       ok(god[mod].prototype[meth], mod + '.prototype.' + meth);
+      console.log(god[mod].prototype[meth]);
     }
   }
+});
+
+test("global variables", function() {
+  equals(window.stat, undefined);
+  equals(window.meth, undefined);
 });
 
 module("echo");
