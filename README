@@ -13,7 +13,9 @@ While  many of these functions are provided by the big JavaScript libraries, it'
 
 ## JSON
 
-There are no plans to implement the JSON Object at this time, since none of the project authors have need of it.
+This project does not include JSON support.  json2.js is recommended as a specification-compatible implementation.
+
+http://www.json.org/js.html
 
 ## Licence
 
