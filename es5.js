@@ -378,15 +378,14 @@ function cure(host, virus) {
 
 es5.use = {
   constructorMethods: function() {
-    infect(Object, es5.Object);
     infect(Function, es5.Function);
     infect(Array, es5.Array);
     infect(String, es5.String);
     infect(Date, es5.Date);
     return this;
   },
-  noImperfectMethods: function() {
-    cure(Object, es5.Object);
+  imperfectMethods: function() {
+    infect(Object, es5.Object);
     return this;
   },
   prototypeMethods: function() {

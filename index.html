@@ -441,7 +441,7 @@ var god = this;
 test("constructor pollution", function() {
   es5.use.constructorMethods();
   for (var mod in es5) {
-    if (mod == 'use') {
+    if (mod == 'use' || mod == 'Object') {
       continue;
     }
     for (var stat in es5[mod]) {
@@ -455,13 +455,19 @@ test("constructor pollution", function() {
       ok(god[mod].prototype[meth] != es5[mod].prototype[meth], '!' + mod + '.prototype.' + meth);
     }
   }
-});
-
-test("stub removal", function() {
-  es5.use.noImperfectMethods();
+  
   for (var stat in es5.Object) {
     if (es5.Object.hasOwnProperty(stat) && stat != 'prototype') {
       ok(god.Object[stat] != es5.Object[stat], 'Object.' + stat);
+    }
+  }
+});
+
+test("stub methods", function() {
+  es5.use.imperfectMethods();
+  for (var stat in es5.Object) {
+    if (es5.Object.hasOwnProperty(stat)) {
+      ok(god.Object[stat], 'Object.' + stat);
     }
   }
 });

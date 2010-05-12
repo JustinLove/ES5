@@ -20,11 +20,11 @@ Load the `es5.js` file.  The file should be compatible with the CommonJS module 
 
 To load everything call
 
-    es5.use.constructorMethods().prototypeMethods();
+    es5.use.constructorMethods().imperfectMethods().prototypeMethods();
 
-The methods on `Object` are mostly partial implementations or outright stubs.  To remove them (after calling `constructorMethods`):
-
-    es5.use.noImperfectMethods();
+- `constructorMethods`: methods on the constructor or class name, e.g. `Array.isArray`.
+- `imperfectMethods`: methods on Object, which can allow most code using the new APIs to run without error, but can't really implement the enhanced object model.
+- `prototypeMethods`: properties on the prototype, which will show up on for-in iterations, and so might not be desired.
 
 Alternately, you can just cherry-pick methods, or even call them directly.  Note that while the `es5.use` methods will not overwrite existing (presumably optimized) methods, such cherry-picking relies on your own discretion.
 
