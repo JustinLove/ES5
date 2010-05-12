@@ -456,6 +456,15 @@ test("constructor pollution", function() {
   }
 });
 
+test("stub removal", function() {
+  es5.use.noImperfectMethods();
+  for (var stat in es5.Object) {
+    if (es5.Object.hasOwnProperty(stat) && stat != 'prototype') {
+      ok(god.Object[stat] != es5.Object[stat], 'Object.' + stat);
+    }
+  }
+});
+
 test("prototype pollution", function() {
   es5.use.prototypeMethods();
   for (var mod in es5) {

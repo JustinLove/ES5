@@ -368,6 +368,14 @@ function infect(host, virus) {
   }
 }
 
+function cure(host, virus) {
+  for (var stat in virus) {
+    if (host[stat] == virus[stat]) {
+      delete host[stat];
+    }
+  }
+}
+
 es5.use = {
   constructorMethods: function() {
     infect(Object, es5.Object);
@@ -375,6 +383,10 @@ es5.use = {
     infect(Array, es5.Array);
     infect(String, es5.String);
     infect(Date, es5.Date);
+    return this;
+  },
+  noImperfectMethods: function() {
+    cure(Object, es5.Object);
     return this;
   },
   prototypeMethods: function() {
