@@ -375,12 +375,14 @@ es5.use = {
     infect(Array, es5.Array);
     infect(String, es5.String);
     infect(Date, es5.Date);
+    return this;
   },
   prototypeMethods: function() {
     infect(Function.prototype, es5.Function.prototype);
     infect(Array.prototype, es5.Array.prototype);
     infect(String.prototype, es5.String.prototype);
     infect(Date.prototype, es5.Date.prototype);
+    return this;
   }
 };
 

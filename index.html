@@ -470,6 +470,12 @@ test("prototype pollution", function() {
   }
 });
 
+test("permit use chaining", function() {
+  for (var meth in es5.use) {
+    equals(es5.use[meth](), es5.use);
+  }
+});
+
 test("global variables", function() {
   equals(window.stat, undefined);
   equals(window.meth, undefined);
