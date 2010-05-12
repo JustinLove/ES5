@@ -437,12 +437,30 @@ test("Date", function() {
 
 module("pollution");
 var god = this;
-test("pollution", function() {
+test("constructor pollution", function() {
+  es5.use.constructorMethods();
   for (var mod in es5) {
+    if (mod == 'use') {
+      continue;
+    }
     for (var stat in es5[mod]) {
       if (es5[mod].hasOwnProperty(stat) && stat != 'prototype') {
         ok(god[mod][stat], mod + '.' + stat);
       }
+    }
+    for (var meth in es5[mod].prototype) {
+      console.log(mod + '.' + meth);
+      // hasOwnProperty return 'undefined' for an object named prototype?
+      ok(god[mod].prototype[meth] != es5[mod].prototype[meth], '!' + mod + '.prototype.' + meth);
+    }
+  }
+});
+
+test("prototype pollution", function() {
+  es5.use.prototypeMethods();
+  for (var mod in es5) {
+    if (mod == 'use') {
+      continue;
     }
     for (var meth in es5[mod].prototype) {
       // hasOwnProperty return 'undefined' for an object named prototype?

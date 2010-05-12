@@ -366,19 +366,22 @@ function infect(host, virus) {
       host[stat] = virus[stat];
     }
   }
-  for (var meth in virus.prototype) {
-    // hasOwnProperty return 'undefined' for an object named prototype?
-    if (!(meth in host.prototype)) {
-      host.prototype[meth] = virus.prototype[meth];
-    }
-  }
 }
 
-infect(Object, es5.Object);
-infect(Function, es5.Function);
-infect(String, es5.String);
-infect(Array, es5.Array);
-infect(String, es5.String);
-infect(Date, es5.Date);
+es5.use = {
+  constructorMethods: function() {
+    infect(Object, es5.Object);
+    infect(Function, es5.Function);
+    infect(Array, es5.Array);
+    infect(String, es5.String);
+    infect(Date, es5.Date);
+  },
+  prototypeMethods: function() {
+    infect(Function.prototype, es5.Function.prototype);
+    infect(Array.prototype, es5.Array.prototype);
+    infect(String.prototype, es5.String.prototype);
+    infect(Date.prototype, es5.Date.prototype);
+  }
+};
 
 })(this.exports = this.exports || {});
