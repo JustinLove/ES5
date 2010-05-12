@@ -11,6 +11,26 @@ While some of the best features of ES5 will never run in an ES3-only engine, it 
 
 While  many of these functions are provided by the big JavaScript libraries, it's not always appropriate to the task to bring in the heavy hitters.
 
+## Usage
+
+Load the `es5.js` file.  The file should be compatible with the CommonJS module system.  For non-CommonJS systems, this means it loads all symbols into the global variable `exports`.  You'll probably want to follow the load with 
+
+    var es5 = exports;
+    delete exports; // optional
+
+To load everything call
+
+    es5.use.constructorMethods().prototypeMethods();
+
+The methods on `Object` are mostly partial implementations or outright stubs.  To remove them (after calling `constructorMethods`):
+
+    es5.use.noImperfectMethods();
+
+Alternately, you can just cherry-pick methods, or even call them directly.  Note that while the `es5.use` methods will not overwrite existing (presumably optimized) methods, such cherry-picking relies on your own discretion.
+
+    Array.prototype.forEach = es5.Array.prototype.forEach;
+    x = es5.Object.create();
+
 ## JSON
 
 This project does not include JSON support.  json2.js is recommended as a specification-compatible implementation.
