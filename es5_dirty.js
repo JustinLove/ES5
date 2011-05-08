@@ -398,6 +398,6 @@ es5.use = {
 };
 
 // dirty:
-//es5.use.constructorMethods().imperfectMethods().prototypeMethods();
+es5.use.constructorMethods().imperfectMethods().prototypeMethods();
 
 })(this.exports = this.exports || {});
