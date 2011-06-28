@@ -75,8 +75,10 @@ es5.Object = {
   keys: function(o) {
     assertObject(o);
     var array = [];
-    for (var i in o) { 
-      array.push(i);
+    for (var i in o) {
+      if (Object.prototype.hasOwnProperty.call(o, i)) {
+        array.push(i);
+      }
     }
     return array;
   }
